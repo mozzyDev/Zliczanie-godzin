@@ -39,20 +39,35 @@ namespace ConsoleApp2
             int hoursFromDays = 0;
             int hours = 0;
             int minutes = 0;
+            int status = 1;
 
             foreach (var item in time)
             {
                 if (item != null)
                 {
-                    DateTime dateTime = DateTime.ParseExact(item, "H:mm", CultureInfo.InvariantCulture);
-                    hours = dateTime.Hour;
-                    minutes = dateTime.Minute;
-                    TimeSpan timeSpan = new TimeSpan(hours, minutes, 0);
-                    timeSpanSuma += timeSpan;
+                    try
+                    {
+                        DateTime dateTime = DateTime.ParseExact(item, "H:mm", CultureInfo.InvariantCulture);
+                        hours = dateTime.Hour;
+                        minutes = dateTime.Minute;
+                        TimeSpan timeSpan = new TimeSpan(hours, minutes, 0);
+                        timeSpanSuma += timeSpan;
+                        status = 1;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Błąd podczas pobierania danych z pliku: ");
+                        Console.WriteLine(e.Message);
+                        status = 0;
+                        break;
+                    }
                 }
             }
-            hoursFromDays = timeSpanSuma.Days * 24 + timeSpanSuma.Hours;
-            Console.WriteLine(hoursFromDays +"h "+ timeSpanSuma.Minutes.ToString()+"min");
+            if (status == 1)
+            {
+                hoursFromDays = timeSpanSuma.Days * 24 + timeSpanSuma.Hours;
+                Console.WriteLine(hoursFromDays + "h " + timeSpanSuma.Minutes.ToString() + "min");
+            }
             Console.ReadKey();
         }
     }
