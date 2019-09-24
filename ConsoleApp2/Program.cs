@@ -11,7 +11,7 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            string file = @"C:\Users\tmozgwa\source\repos\ConsoleApp2\ConsoleApp2\time.txt";
+            string file = @"..\..\time.txt";
             List<string> time = new List<string>();
             int i;
 
@@ -20,7 +20,6 @@ namespace ConsoleApp2
                 using (StreamReader sr = new StreamReader(file))
                 {
                     i = 0;
-
                     do
                     {
                         time.Add(sr.ReadLine());
@@ -36,7 +35,6 @@ namespace ConsoleApp2
             }
 
             //SUMA
-            
             TimeSpan timeSpanSuma = new TimeSpan();
             int hoursFromDays = 0;
             int hours = 0;
